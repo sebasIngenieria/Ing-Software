@@ -1,0 +1,36 @@
+public static void update(string camp1, string camp2,int id)
+           {
+
+               using (SqlConnection cn = new SqlConnection("conectio"))
+               {
+                   SqlCommand cmd = new SqlCommand("UPDATE TABLA SET camp1=@valor1, camp2 =@valor2 where id =@id", cn);
+                   cmd.Parameters.AddWithValue("@valor1", camp1);
+                   cmd.Parameters.AddWithValue("@valor2", camp2);
+                   cmd.Parameters.AddWithValue("@id",id);
+
+                   try
+                   {
+                       cn.Open();
+
+                       cmd.ExecuteNonQuery();
+                   }
+                   catch (Exception ex)
+                   {
+                       string ms = ex.Message;
+                       throw;
+                   }
+                   finally
+                   {
+
+                       if (cn.State == ConnectionState.Open)
+                       {
+                           cn.Close();
+                       }
+
+                   }
+
+
+
+               }
+
+           }
