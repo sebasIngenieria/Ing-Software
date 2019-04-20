@@ -1,0 +1,34 @@
+public static void delete(int id)
+           {
+
+               using (SqlConnection cn = new SqlConnection("conectio"))
+               {
+                   SqlCommand cmd = new SqlCommand("delete from where id =@id", cn);
+                   cmd.Parameters.AddWithValue("@id", id);
+
+                   try
+                   {
+                       cn.Open();
+
+                       cmd.ExecuteNonQuery();
+                   }
+                   catch (Exception ex)
+                   {
+                       string ms = ex.Message;
+                       throw;
+                   }
+                   finally
+                   {
+
+                       if (cn.State == ConnectionState.Open)
+                       {
+                           cn.Close();
+                       }
+
+                   }
+
+
+
+               }
+
+           }
