@@ -1,0 +1,35 @@
+public static void Insert(string camp1, string camp2) {
+
+               using (SqlConnection cn = new SqlConnection ("conectio"))
+               {
+                   SqlCommand cmd = new SqlCommand("INSERT INTO TABLA (camp1, camp2)VALUES(@valor1,@valor2)",cn);
+                   cmd.Parameters.AddWithValue("@valor1", camp1);
+                   cmd.Parameters.AddWithValue("@valor2", camp2);
+
+                   try
+                   {
+                       cn.Open();
+
+                       cmd.ExecuteNonQuery();
+                   }
+                   catch (Exception ex)
+                   {
+                       string ms = ex.Message;
+                       throw;
+                   }
+                   finally
+                   {
+
+                       if (cn.State== ConnectionState.Open)
+                       {
+                           cn.Close();
+                       }
+                   
+                   }
+
+
+                   
+               }
+           
+           }
+
