@@ -1,0 +1,40 @@
+public static void select (int id)
+           {
+
+               using (SqlConnection cn = new SqlConnection("conectio"))
+               {
+                   SqlCommand cmd = new SqlCommand("select from where id =@id", cn);
+                   cmd.Parameters.AddWithValue("@id", id);
+
+                   try
+                   {
+
+SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    da.Fill(dt);
+
+                    datagrid.DataSource = dt;
+                    datagrid.DataBund();
+                       
+                   }
+                   catch (Exception ex)
+                   {
+                       string ms = ex.Message;
+                       throw;
+                   }
+                   finally
+                   {
+
+                       if (cn.State == ConnectionState.Open)
+                       {
+                           cn.Close();
+                       }
+
+                   }
+
+
+
+               }
+
+           }
